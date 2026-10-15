@@ -1,0 +1,15 @@
+# /etc/systemd/system/churn-dashboard.service
+[Unit]
+Description=E-Commerce Churn Analytics (Streamlit)
+After=network.target
+
+[Service]
+User=churn
+WorkingDirectory=/opt/churn-retention-system
+EnvironmentFile=/opt/churn-retention-system/.env
+ExecStart=/opt/churn-retention-system/venv/bin/streamlit run app.py --server.port 8501 --server.address 127.0.0.1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

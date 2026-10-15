@@ -1,0 +1,14 @@
+# OPTIONAL - only if you want the REST API.  /etc/systemd/system/churn-api.service
+[Unit]
+Description=Churn REST API (Flask + gunicorn)
+After=network.target
+
+[Service]
+User=churn
+WorkingDirectory=/opt/churn-retention-system
+EnvironmentFile=/opt/churn-retention-system/.env
+ExecStart=/opt/churn-retention-system/venv/bin/gunicorn -w 2 -b 127.0.0.1:5000 api:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
